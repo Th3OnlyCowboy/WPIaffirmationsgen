@@ -1,0 +1,7 @@
+create table affirmations_test (id INT NOT NULL DEFAULT unique_rowid() PRIMARY KEY, text STRING NOT NULL UNIQUE, created_at TIMESTAMPTZ DEFAULT NOW());
+
+create table connections_test (id INT NOT NULL DEFAULT unique_rowid() PRIMARY KEY, img_id INT REFERENCES images_test (id) ON UPDATE CASCADE ON DELETE NO ACTION, aff_id INT REFERENCES affirmations_test (id) ON UPDATE CASCADE ON DELETE NO ACTION, background_id INT REFERENCES backgrounds_test (id) ON UPDATE CASCADE ON DELETE NO ACTION, created_at TIMESTAMPTZ DEFAULT NOW());
+
+create table images_test (id INT NOT NULL DEFAULT unique_rowid() PRIMARY KEY, imgurl STRING NOT NULL UNIQUE, created_at TIMESTAMPTZ DEFAULT NOW());
+
+create table backgrounds_test (id INT NOT NULL DEFAULT unique_rowid() PRIMARY KEY, imgurl STRING NOT NULL UNIQUE, created_at TIMESTAMPTZ DEFAULT NOW());
