@@ -1,0 +1,14 @@
+1. Install the root certificate here
+	https://cockroachlabs.cloud/clusters/ad70891d-1f1e-4dae-967f-1aed064d5bbc/cert
+
+2. copy file path to the certificate and replace it for any file path in this file where it says "your file path here"
+
+3.open powershell and copy in commands one by one
+
+Invoke-WebRequest -Uri https://cockroachlabs.cloud/clusters/ad70891d-1f1e-4dae-967f-1aed064d5bbc/cert -OutFile C:\Users\bluke\Downloads\root.crt
+															^your file path here
+
+$ErrorActionPreference = "Stop"; [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;$ProgressPreference = 'SilentlyContinue'; $null = New-Item -Type Directory -Force $env:appdata/cockroach; Invoke-WebRequest -Uri https://binaries.cockroachdb.com/cockroach-v21.2.4.windows-6.2-amd64.zip -OutFile cockroach.zip; Expand-Archive -Force -Path cockroach.zip; Copy-Item -Force "cockroach/cockroach-v21.2.4.windows-6.2-amd64/cockroach.exe" -Destination $env:appdata/cockroach; $Env:PATH += ";$env:appdata/cockroach"
+
+cockroach sql --url "postgresql://tenheller:q8NCFp26rJ1wf1qf@free-tier.gcp-us-central1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=C:\Users\bluke\Downloads\root.crt&options=--cluster%3Dtenler-test-5472"
+																				^your file path here
